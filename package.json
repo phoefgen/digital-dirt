@@ -4,6 +4,7 @@
   "description": "Plan offroad excursions in British Columbia",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,23 @@
   },
   "homepage": "https://github.com/phoefgen/digital-dirt#readme",
   "devDependencies": {
-    "jasmine": "^2.8.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cache": "^0.5.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-uglify": "^3.0.0",
+    "jasmine": "^2.8.0",
+    "pug": "^2.0.0-rc.4"
   }
 }
