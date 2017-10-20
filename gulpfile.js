@@ -4,7 +4,7 @@
 
 
 /*****************************************************************************/
-// setup env. 
+// setup env.
 
 var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
@@ -54,10 +54,10 @@ gulp.task('images', function() {
 });
 
 gulp.task('pug', function() {
-  return gulp.src('src/html/**/*.pug', function() {
+  return gulp.src('src/html/**/*.pug')
     .pipe(pug())
     .pipe(gulp.dest('dist/assets/html'));
-}
+});
 
 gulp.task('clean', function() {
     return del(['dist/assets/html', 'dist/assets/css', 'dist/assets/js', 'dist/assets/img']);
@@ -66,7 +66,7 @@ gulp.task('clean', function() {
 
 
 /*****************************************************************************/
-// Helper Functions. 
+// Helper Functions.
 
 
 gulp.task('default', ['clean'], function() {
@@ -88,4 +88,3 @@ gulp.task('watch', function() {
   gulp.watch('src/html/*.html', ['markup']);
 
 });
-
