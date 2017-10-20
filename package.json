@@ -1,0 +1,22 @@
+{
+  "name": "digital-dirt",
+  "version": "1.0.0",
+  "description": "Plan offroad excursions in British Columbia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phoefgen/digital-dirt.git"
+  },
+  "author": "Paul Hoefgen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phoefgen/digital-dirt/issues"
+  },
+  "homepage": "https://github.com/phoefgen/digital-dirt#readme",
+  "devDependencies": {
+    "jasmine": "^2.8.0"
+  }
+}
