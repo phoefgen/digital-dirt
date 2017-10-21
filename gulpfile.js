@@ -1,5 +1,3 @@
-// function reference: https://markgoodyear.com/2014/01/getting-started-with-gulp/
-
 // To install requirements: `npm install gulp-ruby-sass gulp-autoprefixer gulp-cssnano gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del gulp-pug pug --save-dev`
 
 
@@ -18,8 +16,10 @@ var gulp = require('gulp'),
   notify = require('gulp-notify'),
   cache = require('gulp-cache'),
   del = require('del'),
-  browserSync = require('browser-sync').create();
-pug = require('gulp-pug');
+  browserSync = require('browser-sync').create(),
+  jasmineBrowser = require('gulp-jasmine-browser'),
+  babel = require('gulp-babel'),
+  pug = require('gulp-pug');
 
 /*****************************************************************************/
 // Setup workflow tasks
@@ -39,6 +39,7 @@ gulp.task('scripts', function () {
   return gulp.src('src/scripts/**/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
+    .pipe(babel({presets: ['env']}))
     .pipe(concat('main.js'))
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(rename({ suffix: '.min' }))
@@ -61,7 +62,7 @@ gulp.task('markup', function () {
     .pipe(pug({
       pretty: true
     }))
-    .pipe(gulp.dest('dist/assets/html'))
+    .pipe(gulp.dest('dist/assets'))
     .pipe(browserSync.stream())
     .pipe(notify({ message: 'pug task complete' }));
 });
@@ -75,14 +76,22 @@ gulp.task('clean', function () {
 // Helper Functions.
 
 
+gulp.task('test', function () {
+  return gulp.src(['dist/**/*.js', 'jasmine/spec/**/*'])
+  .pipe(jasmineBrowser.specRunner())
+  .pipe(jasmineBrowser.server({port: 8888}));
+});
+
+
+
 gulp.task('default', ['clean'], function () {
-  gulp.start('styles', 'markup', 'scripts', 'images', 'watch');
+  gulp.start('styles', 'markup', 'scripts', 'images', 'test', 'watch');
 });
 
 gulp.task('watch', function () {
   // Setup watcher.
   browserSync.init({
-    server: "./dist/assets/html",
+    server: "./dist/assets",
     index: "index.html"
   });
 
@@ -96,6 +105,6 @@ gulp.task('watch', function () {
   gulp.watch('src/images/**/*', ['images']);
 
   // Watch pug files
-  gulp.watch('src/html/*.pug', ['markup']);
+  gulp.watch('src/html/**/*.pug', ['markup']);
 
 });
