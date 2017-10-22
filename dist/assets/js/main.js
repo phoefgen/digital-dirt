@@ -3,7 +3,8 @@
 /* Primary Entry point for dana30
 */
 
-// Define config per tab
+// Define regional maps.
+// TODO: TECH DEBT: These should be in a single conf object to allow iteration over N regions.
 var americas = {
     center: { lat: 29.766083, lng: -95.358810 },
     regions: [{
@@ -26,7 +27,7 @@ var americas = {
         loc: { lat: -23.533773, lng: -46.625290 }
     }],
     services: ['S3', 'EC2', 'API', 'Route53'],
-    zoom: 2
+    zoom: 3
 };
 
 var europe = {
@@ -67,9 +68,16 @@ var asia = {
     zoom: 3
 };
 
+// Global region list is  constructed at runtime.
+var globalRegion = {
+    center: { lat: 16.77532, lng: -3.008265 },
+    services: '',
+    zoom: 2
+};
+
 // Define application configuration
 var appConf = {
-    defaultRegion: asia
+    defaultRegion: europe
 };
 
 // Control Map loading.
@@ -100,12 +108,45 @@ function initMap(region) {
             title: conf.regions[0].name
         });
     };
+
+    // Enable map switching
 }
+
+/********************************************************************************************* */
+
+/********************************************************************************************* */
+// UI CONTROL.
 
 // Maps are returned centered on  the viewport at page load. This breaks the centering
 window.onresize = function () {
-    initMap(northAmerica);
+    initMap(americas);
 };
+
+window.onload = function () {
+    // Enable tab switching
+    //TODO: Why do these need to be wrapped in a function? Something to do with scope.
+    $('#americas').on('click', function () {
+        initMap(americas);
+    });
+    $('#asia').on('click', function () {
+        initMap(asia);
+    });
+    $('#europe').on('click', function () {
+        initMap(europe);
+    });
+    $('#global').on('click', function () {
+        initMap(globalRegion);
+    });
+
+    // Construct Data for global view
+    // Combine the  AWS regions from all global slices.
+    var globalRegions = europe.regions.concat(asia.regions).concat(americas.regions);
+    console.log(globalRegions);
+    globalRegion.regions = globalRegions;
+};
+
+/********************************************************************************************* */
+// Fluffy Effects
 
 // Turn down the active menu item glow after a few seconds.
 setTimeout(function () {
