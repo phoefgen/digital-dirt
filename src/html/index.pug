@@ -2,6 +2,33 @@ doctype html
 html(lang='en')
   head
     title Hello World
+    script(type='text/javascript' src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(type='text/javascript' src='js/main.js')
+    link(href='https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet"')
+    link(href='https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"')
+
+    link(href='/css/style.min.css', rel='stylesheet')
+
   body
-    h1 How Exciting! A new Project!
+    site
+      header
+        h1 Amazon Web Services Geo Status.
+        .selectRegion
+          ul
+            li.activeRegion Americas
+            li Europe
+            li Asia Pacific
+            li Global
+      #map
+      #insetPanel
+        h3 Amazon Services
+        ul
+          li S3
+          li EC2
+          li API
+          li Route53
+    footer
+      p paul.hoefgen@gmail.com   --  #[a(href='https://github.com/phoefgen/digital-dirt') Source on Github]
+      p NOTE: Amazon does not publish the location of its DC's, markers are approximate
+    script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB7qdN9GmWXn3wLhxhkJ18cEL6DgWpoY4Y&v=3&callback=initMap')
+
