@@ -3,8 +3,11 @@
 /* Primary Entry point for dana30
 */
 
-// Define regional maps.
+/********************************************************************************************* */
+// Define Data Models.
+/********************************************************************************************* */
 // TODO: TECH DEBT: These should be in a single conf object to allow iteration over N regions.
+
 var americas = {
     center: { lat: 29.766083, lng: -95.358810 },
     regions: [{
@@ -75,12 +78,22 @@ var globalRegion = {
     zoom: 2
 };
 
-// Define application configuration
+/********************************************************************************************* */
+// Configuration
+/********************************************************************************************* */
+
 var appConf = {
-    defaultRegion: europe
+    defaultRegion: americas
 };
 
-// Control Map loading.
+// This variable is used by the window resize function to generate a new centered map on window resize.
+// Initially set to default region at page load, and updated when the SAP switches.
+var lastSelectedRegion = appConf.defaultRegion;
+
+/********************************************************************************************* */
+// Map functions.
+/********************************************************************************************* */
+
 function initMap(region) {
     var conf = void 0;
 
@@ -107,48 +120,62 @@ function initMap(region) {
             map: map,
             title: conf.regions[0].name
         });
-    };
-
-    // Enable map switching
+    }
 }
 
 /********************************************************************************************* */
-
-/********************************************************************************************* */
 // UI CONTROL.
+/********************************************************************************************* */
 
-// Maps are returned centered on  the viewport at page load. This breaks the centering
-window.onresize = function () {
-    initMap(americas);
-};
+// There are 4 SPA configurations, each controlled by knockout. This code renders the graphs, and sets up the config.
+// It  leaves the ervice availability monitoring to knockoutJS.
 
 window.onload = function () {
-    // Enable tab switching
-    //TODO: Why do these need to be wrapped in a function? Something to do with scope.
-    $('#americas').on('click', function () {
-        initMap(americas);
-    });
-    $('#asia').on('click', function () {
-        initMap(asia);
-    });
-    $('#europe').on('click', function () {
-        initMap(europe);
-    });
-    $('#global').on('click', function () {
-        initMap(globalRegion);
-    });
 
     // Construct Data for global view
     // Combine the  AWS regions from all global slices.
     var globalRegions = europe.regions.concat(asia.regions).concat(americas.regions);
-    console.log(globalRegions);
     globalRegion.regions = globalRegions;
+
+    // Enable tab switching
+    //TODO: Why do these need to be wrapped in a function? Something to do with scope.
+    var flipClass = function flipClass(newActive) {
+        lastSelectedRegion = newActive;
+        $('.activeRegion').removeClass('activeRegion calmActiveRegion');
+        $('#' + newActive).addClass('activeRegion calmActiveRegion');
+    };
+
+    $('#americas').on('click', function () {
+        flipClass('americas');
+        initMap(americas);
+    });
+
+    $('#asia').on('click', function () {
+        flipClass('asia');
+        initMap(asia);
+    });
+
+    $('#europe').on('click', function () {
+        flipClass('europe');
+        initMap(europe);
+    });
+
+    $('#global').on('click', function () {
+        flipClass('global');
+        initMap(globalRegion);
+    });
+};
+
+// Maps are returned centered on the viewport at page load. This breaks the centering when pages
+// are reloaded.
+window.onresize = function () {
+    initMap(window[lastSelectedRegion]);
 };
 
 /********************************************************************************************* */
 // Fluffy Effects
 
-// Turn down the active menu item glow after a few seconds.
+// Turn down the active menu item glow after a few seconds on page load.
 setTimeout(function () {
     $('.activeRegion').addClass('calmActiveRegion');
 }, 2000);
