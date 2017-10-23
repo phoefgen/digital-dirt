@@ -93,7 +93,7 @@ let globalRegion = {
 /********************************************************************************************* */
 
 const appConf = {
-    defaultRegion: americas
+    defaultRegion: globalRegion
 };
 
 // This variable is used by the window resize function to generate a new centered map on window resize.
@@ -106,6 +106,14 @@ let lastSelectedRegion = appConf.defaultRegion;
 
 function initMap(region) {
     let conf;
+
+    // Construct Data for global view
+    // Combine the  AWS regions from all global slices.
+    if (typeof globalRegions === 'undefined') {
+        let globalRegions = europe.regions.concat(asia.regions).concat(americas.regions);
+        globalRegion.regions = globalRegions;
+    }
+
 
     // Cant pass region variables on page load.
     if (!region) {
@@ -144,10 +152,7 @@ function initMap(region) {
 
 window.onload = function () {
 
-    // Construct Data for global view
-    // Combine the  AWS regions from all global slices.
-    let globalRegions = europe.regions.concat(asia.regions).concat(americas.regions);
-    globalRegion.regions = globalRegions;
+
 
     // Enable tab switching
     //TODO: Why do these need to be wrapped in a function? Something to do with scope.
@@ -172,14 +177,15 @@ window.onload = function () {
         initMap(europe);
     });
 
-    $('#global').on('click', function () {
-        flipClass('global');
+    $('#globalRegion').on('click', function () {
+        flipClass('globalRegion');
         initMap(globalRegion);
     });
 };
 
 // Maps are returned centered on the viewport at page load. This breaks the centering when pages
 // are reloaded.
+
 window.onresize = function () {
     initMap(window[lastSelectedRegion]);
 };
