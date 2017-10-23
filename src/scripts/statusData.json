@@ -1,0 +1,454 @@
+{
+    "world": [
+        {
+            "regionName": "americas",
+            "center": {
+                "lat": 29.766083,
+                "lng": -95.358810
+            },
+            "zoom": 3,
+            "datacentres": [
+                {
+                    "name": "North Carolina",
+                    "loc": {
+                        "lat": 35.782169,
+                        "lng": -80.793457
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "North California",
+                    "loc": {
+                        "lat": 37.926868,
+                        "lng": -122.519531
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Montreal",
+                    "visible": true,
+                    "loc": {
+                        "lat": 45.644768,
+                        "lng": -73.564453
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Ohio",
+                    "visible": true,
+                    "loc": {
+                        "lat": 40.513799,
+                        "lng": -82.705078
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Oregon",
+                    "visible": true,
+                    "loc": {
+                        "lat": 43.834527,
+                        "lng": -120.9375
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "San Paulo",
+                    "visible": true,
+                    "loc": {
+                        "lat": -23.533773,
+                        "lng": -46.625290
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "regionName": "europe",
+            "center": {
+                "lat": 48.864716,
+                "lng": 2.349014
+            },
+            "zoom": 6,
+            "datacentres": [
+                {
+                    "name": "Dublin",
+                    "visible": true,
+                    "loc": {
+                        "lat": 53.350140,
+                        "lng": -6.266155
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Frankfurt",
+                    "visible": true,
+                    "loc": {
+                        "lat": 50.110924,
+                        "lng": 8.682127
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "London",
+                    "loc": {
+                        "lat": 51.509865,
+                        "lng": -0.118092
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "regionName": "asia",
+            "center": {
+                "lat": 4.399493,
+                "lng": 113.991386
+            },
+            "zoom": 3,
+            "datacentres": [
+                {
+                    "name": "Mumbai",
+                    "visible": true,
+                    "loc": {
+                        "lat": 18.947622,
+                        "lng": 72.834442
+                    },
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Seoul",
+                    "loc": {
+                        "lat": 37.532600,
+                        "lng": 127.024612
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Singapore",
+                    "loc": {
+                        "lat": 1.290270,
+                        "lng": 103.851959
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Sydney",
+                    "loc": {
+                        "lat": -33.865143,
+                        "lng": 151.209900
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Tokyo",
+                    "loc": {
+                        "lat": 35.652832,
+                        "lng": 139.839478
+                    },
+                    "visible": true,
+                    "services": [
+                        {
+                            "name": "ec2",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "route53",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "api",
+                            "statusOK": null,
+                            "outageData": ""
+                        },
+                        {
+                            "name": "s3",
+                            "statusOK": null,
+                            "outageData": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
