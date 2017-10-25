@@ -39,7 +39,7 @@ gulp.task('scripts', function () {
   return gulp.src('src/scripts/**/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
-    .pipe(babel({presets: ['env']}))
+    .pipe(babel({ presets: ['env'] }))
     .pipe(concat('main.js'))
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(rename({ suffix: '.min' }))
@@ -47,6 +47,12 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(browserSync.stream())
     .pipe(notify({ message: 'Scripts task complete' }));
+});
+
+gulp.task('data', function () {
+  return gulp.src('src/data/**/*.json')
+    .pipe(gulp.dest('dist/assets/data'));
+
 });
 
 gulp.task('images', function () {
@@ -68,7 +74,7 @@ gulp.task('markup', function () {
 });
 
 gulp.task('clean', function () {
-  return del(['dist/assets/html', 'dist/assets/css', 'dist/assets/js', 'dist/assets/img']);
+  return del(['dist/assets/data','dist/assets/html', 'dist/assets/css', 'dist/assets/js', 'dist/assets/img']);
 });
 
 
@@ -78,14 +84,14 @@ gulp.task('clean', function () {
 
 gulp.task('test', function () {
   return gulp.src(['dist/**/*.js', 'jasmine/spec/**/*'])
-  .pipe(jasmineBrowser.specRunner())
-  .pipe(jasmineBrowser.server({port: 8888}));
+    .pipe(jasmineBrowser.specRunner())
+    .pipe(jasmineBrowser.server({ port: 8888 }));
 });
 
 
 
 gulp.task('default', ['clean'], function () {
-  gulp.start('styles', 'markup', 'scripts', 'images', 'test', 'watch');
+  gulp.start('styles', 'markup', 'scripts', 'images', 'test', 'data','watch');
 });
 
 gulp.task('watch', function () {
