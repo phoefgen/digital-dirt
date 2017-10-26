@@ -7,9 +7,15 @@
 
 
 function createInfoWindow(truck) {
+    //sanitise optional short description
+    let short_desc = '';
+    if (truck.description_short) {
+        short_desc = truck.description_short
+    };
+
     return `<div id="truckDetail">
                 <h1>${truck.name}</h1>
-                <h3>${truck.description_short}</h3>
+                <h3>${short_desc}</h3>
                 <p>${truck.description_long}</p>
                 `;
 }
@@ -82,6 +88,9 @@ function getTrucks(truckMap) {
 
                 // add new truck object to the global array.
                 trucks.push(truck);
+
+                // add truck to search list
+                $('#truckList').append(`<li>${truck.name}</li>`);
             }
         }
     });

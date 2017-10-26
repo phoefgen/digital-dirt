@@ -8,7 +8,13 @@
 /********************************************************************************************* */
 
 function createInfoWindow(truck) {
-    return '<div id="truckDetail">\n                <h1>' + truck.name + '</h1>\n                <h3>' + truck.description_short + '</h3>\n                <p>' + truck.description_long + '</p>\n                ';
+    //sanitise optional short description
+    var short_desc = '';
+    if (truck.description_short) {
+        short_desc = truck.description_short;
+    };
+
+    return '<div id="truckDetail">\n                <h1>' + truck.name + '</h1>\n                <h3>' + short_desc + '</h3>\n                <p>' + truck.description_long + '</p>\n                ';
 }
 
 function createMarker(truck, truckMap) {
@@ -76,6 +82,9 @@ function getTrucks(truckMap) {
 
                     // add new truck object to the global array.
                     trucks.push(truck);
+
+                    // add truck to search list
+                    $('#truckList').append('<li>' + truck.name + '</li>');
                 })();
             }
         }
