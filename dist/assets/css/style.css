@@ -1,11 +1,11 @@
 body {
   background-color: midnightblue;
   font-family: "Ubuntu Mono", monospace;
-  color: black;
+  color: blac #k;
 }
 
 h1 {
-  color: white;
+  color: black;
   text-align: center;
   padding-top: 0;
   margin-top: 0;
@@ -30,68 +30,24 @@ footer a:visited {
   color: white;
 }
 
-.site {
-  position: relative;
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-#map {
-  height: 80vh;
-  width: 100%;
+.map {
+  height: 100vh;
   border-radius: 5px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
-.selectRegion ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 10px;
-  text-align: center;
-}
-
-.selectRegion li {
-  display: inline;
-  height: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: white;
-  border-width: 1px;
-  border-right: solid;
-  border-left: solid;
-  border-color: yellow;
-  -webkit-transition: text-shadow 300ms;
-  transition: text-shadow 300ms;
-}
-
-.activeRegion {
-  text-shadow: 0 0 1px #13f9bc, 0 0 5px #13f9bc, 0 0 7px #13f9bc, 0 0 5px #56f931, 0 0 9px #56f931, 0 0 10px #56f931, 0 0 15px #56f931, 0 0 20px #56f931;
-  color: green;
-  -webkit-transition: all 500ms;
-  transition: all 500ms;
-}
-
-.calmActiveRegion {
-  text-shadow: none;
-  text-decoration: underline;
-  border-width: 5px;
-}
-
-.selectRegion li:hover {
-  text-shadow: 0 0 1px #13f9bc, 0 0 5px #13f9bc, 0 0 7px #13f9bc, 0 0 5px #56f931, 0 0 9px #56f931, 0 0 10px #56f931, 0 0 15px #56f931, 0 0 20px #56f931;
-}
-
-#insetPanel {
-  height: 175px;
-  width: 100%;
+.sidebar {
+  position: absolute;
+  width: 30%;
+  height: 100vh;
   background-color: white;
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: black;
-  border-style: solid;
-  -webkit-box-shadow: 5px 10px 5px grey;
-          box-shadow: 5px 10px 5px grey;
-}
-
-#insetPanel ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 10px;
+  z-index: 99;
 }

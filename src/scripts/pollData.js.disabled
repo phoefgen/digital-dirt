@@ -11,7 +11,7 @@ function getData() {
     // `npm install -g corsproxy && corsproxy`
 
     // updating the global var with the current state of AWS services.
-    fetch("http://localhost:1337/status.aws.amazon.com/data.json")
+    fetch("http://data.streetfoodapp.com/1.1/schedule/vancouver/")
         .then(
         function (response) {
             console.log('getting data');
@@ -57,4 +57,4 @@ function setup(schema, currentData) {
         .then(main());
 }
 
-setup(schema, currentData);
+//setup(schema, currentData);
