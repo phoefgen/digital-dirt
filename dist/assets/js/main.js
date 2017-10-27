@@ -7,6 +7,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* Primary Entry point for dana30
 */
 
+var trucks = ko.observableArray();
+var truckMap = '';
+var infowindow = void 0;
+
 /********************************************************************************************* */
 // Collect truck data
 /********************************************************************************************* */
@@ -28,27 +32,22 @@ var truck = function () {
 
         // translate API data
         this.name = _truck.name;
-        this.position = { lat: _truck.last.latitude, lng: _truck.last.longitude };
         this.email = _truck.email;
         this.rating = _truck.rating;
         this.description_long = _truck.description;
         this.id = index;
+        this.position = { lat: _truck.last.latitude, lng: _truck.last.longitude };
 
-        // Not all trucks have short descriptions.
+        // Not all valid trucks have short descriptions.
         if (_truck.description_short !== null) {
             this.description_short = _truck.description_short;
         } else {
             this.description_short = ' ';
         }
-
-        // In some cases, a truck is registered but has never been on the road and does
-        // not have a 'last' attribute. Guess how many hours that took to figure out!
-        if (_truck.last) {
-            // Create a HTML string to be rendered for this truck in the infowindow.
-            this.infowindowContent = this.createInfoWindowContent();
-            this.infowindow = new google.maps.InfoWindow({ content: this.infowindowContent });
-            this.marker = this.createMarker(this.name, this.position, this.infowindow, this.id);
-        }
+        // Buildinfowindow, and create marker using infowindow.
+        this.infowindowContent = this.createInfoWindowContent();
+        this.infowindow = new google.maps.InfoWindow({ content: this.infowindowContent });
+        this.marker = this.createMarker(this.name, this.position, this.infowindow, this.id);
     }
 
     _createClass(truck, [{
@@ -58,19 +57,17 @@ var truck = function () {
                 title: name,
                 icon: '../img/truck.png',
                 position: position,
-                map: truckMap,
+                //  map: truckMap,
                 animation: google.maps.Animation.DROP
             });
-
             window.google.maps.event.addListener(marker, 'click', function () {
+                // On click, close all open truck info windows and open the infowindow
+                // that was called.
                 trucks().forEach(function (truck) {
                     truck.infowindow.close(truckMap, truck.marker);
                 });
-                debugger;
                 var truck = trucks()[id];
-                debugger;
                 truck.infowindow.open(truckMap, truck.marker);
-                debugger;
             });
             return marker;
         }
@@ -85,23 +82,35 @@ var truck = function () {
     return truck;
 }();
 
+function buildList() {
+    ko.applyBindings(trucks);
+}
+
 function getTrucks() {
     // get truck data
     getData(function (data) {
         // Build an array of custom truck objects from the API data.
         var nameVendors = Object.keys(data.vendors);
         var numVendors = nameVendors.length;
+        var cleanVendors = [];
+        console.log(data);
 
-        for (var i = 0; i <= numVendors; i++) {
-            trucks.push(new truck(data.vendors[nameVendors[i]], i));
+        for (var i = 0; i < numVendors; i++) {
+            // Some trucks are incomplete (especially those that are registered but have never
+            // checked in.)
+            var dirtyTruck = data.vendors[nameVendors[i]];
+            if (typeof data.vendors[nameVendors[i]].last != "undefined") {
+                cleanVendors.push(dirtyTruck);
+            }
         }
-        //trucks()[0].infowindow.open(truckMap, trucks()[0].marker );
+        // fill the knockout observable array with truck markers.
+        for (var _i = 0; _i < cleanVendors.length; _i++) {
+            trucks.push(new truck(cleanVendors[_i], _i));
+        }
+
+        buildList();
     });
 }
-
-var trucks = ko.observableArray();
-var truckMap = '';
-var infowindow = void 0;
 
 /********************************************************************************************* */
 // Map functions.
