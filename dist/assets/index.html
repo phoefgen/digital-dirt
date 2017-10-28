@@ -20,8 +20,8 @@
           <input type="text" name="searchBox" placeholder="name">
           <hr>
           <div class="searchList">
-            <ul data-bind="foreach: trucks">
-              <li><span data-bind="text: name"></span></li>
+            <ul data-bind="foreach: visibleTrucks">
+              <li><span data-bind="text: name, click: $parent.selectedTruck"></span></li>
             </ul>
           </div>
         </div>

@@ -20,9 +20,9 @@ html(lang='en')
           input(type='text', name='searchBox', placeholder='name')
           hr
           .searchList
-            ul(data-bind="foreach: trucks")
+            ul(data-bind="foreach: visibleTrucks")
               li
-                span(data-bind='text: name')
+                span(data-bind='text: name, click: $parent.selectedTruck')
         .map#map
 
 

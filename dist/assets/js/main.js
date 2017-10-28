@@ -7,7 +7,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* Primary Entry point for dana30
 */
 
-var trucks = ko.observableArray();
+var trucks = [];
 var truckMap = '';
 var infowindow = void 0;
 
@@ -48,6 +48,9 @@ var truck = function () {
         this.infowindowContent = this.createInfoWindowContent();
         this.infowindow = new google.maps.InfoWindow({ content: this.infowindowContent });
         this.marker = this.createMarker(this.name, this.position, this.infowindow, this.id);
+
+        // Make all trucks visibile by default
+        this.visible = true;
     }
 
     _createClass(truck, [{
@@ -57,16 +60,16 @@ var truck = function () {
                 title: name,
                 icon: '../img/truck.png',
                 position: position,
-                //  map: truckMap,
+                map: truckMap,
                 animation: google.maps.Animation.DROP
             });
             window.google.maps.event.addListener(marker, 'click', function () {
                 // On click, close all open truck info windows and open the infowindow
                 // that was called.
-                trucks().forEach(function (truck) {
+                trucks.forEach(function (truck) {
                     truck.infowindow.close(truckMap, truck.marker);
                 });
-                var truck = trucks()[id];
+                var truck = trucks[id];
                 truck.infowindow.open(truckMap, truck.marker);
             });
             return marker;
@@ -81,10 +84,6 @@ var truck = function () {
 
     return truck;
 }();
-
-function buildList() {
-    ko.applyBindings(trucks);
-}
 
 function getTrucks() {
     // get truck data
@@ -103,14 +102,32 @@ function getTrucks() {
                 cleanVendors.push(dirtyTruck);
             }
         }
-        // fill the knockout observable array with truck markers.
+        // fill the JS array
         for (var _i = 0; _i < cleanVendors.length; _i++) {
             trucks.push(new truck(cleanVendors[_i], _i));
         }
 
-        buildList();
+        // Create a view model, and bind the view to it.
+        ko.applyBindings(new ViewModel());
     });
 }
+
+var ViewModel = function ViewModel() {
+    var self = this;
+
+    // map global array of passed in trucks to observableArray of truck objects.
+    self.trucks = ko.observableArray(trucks);
+
+    // All trucks are set to default visible, include all trucks when the model is instantiated.
+    // This observable array will be manipulated to control the visibility of trucks.
+    self.visibleTrucks = self.trucks;
+
+    // Fire the pre defined click event if a list item is selected.
+    self.selectedTruck = function (truck) {
+        console.log(truck);
+        google.maps.event.trigger(truck.marker, 'click');
+    };
+};
 
 /********************************************************************************************* */
 // Map functions.
@@ -118,14 +135,11 @@ function getTrucks() {
 
 function initMap() {
 
-    // Generate a map of Vancouver
+    // Generate a map of Vancouver BC
     truckMap = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: { lat: 49.246292, lng: -123.116226 }
     });
-
-    // Generate a single, reusable infowindow
-
     // Place food trucks on it.
     getTrucks();
 }
