@@ -17,7 +17,7 @@
       <content>
         <div class="sidebar">
           <h2>Search</h2>
-          <input type="text" name="searchBox" placeholder="name">
+          <input data-bind="textInput: searchString" type="text" name="searchBox" placeholder="Search for a truck name, type, or other keywords">
           <hr>
           <div class="searchList">
             <ul data-bind="foreach: visibleTrucks">

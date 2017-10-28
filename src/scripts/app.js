@@ -83,7 +83,6 @@ function getTrucks() {
         let nameVendors = Object.keys(data.vendors);
         let numVendors = nameVendors.length;
         let cleanVendors = [];
-        console.log(data);
 
         for (let i = 0; i < numVendors; i++) {
             // Some trucks are incomplete (especially those that are registered but have never
@@ -104,15 +103,11 @@ function getTrucks() {
     });
 }
 
-var ViewModel = function() {
+var ViewModel = function () {
     var self = this;
 
     // map global array of passed in trucks to observableArray of truck objects.
     self.trucks = ko.observableArray(trucks);
-
-    // All trucks are set to default visible, include all trucks when the model is instantiated.
-    // This observable array will be manipulated to control the visibility of trucks.
-    self.visibleTrucks = self.trucks;
 
     // Fire the pre defined click event if a list item is selected.
     self.selectedTruck = function (truck) {
@@ -121,6 +116,29 @@ var ViewModel = function() {
     };
 
 
+    // Manipulate the list and marker visibility with a text search
+    // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+
+    // init with null value to allow placeholder txt to be dispalyed.
+    self.searchString = ko.observable('');
+
+    // modify the members of visible trucks with search
+    self.visibleTrucks = ko.computed(function () {
+        // make no changes if there is nothing in the search box (init state)
+        if (self.searchString() === '') {
+            return self.trucks();
+        } else
+            return ko.utils.arrayFilter(self.visibleTrucks(), function (truck) {
+                // Combine name and description search (food genre is likely mentioned in the description)
+                // sanitize text input
+                let filter = self.searchString().toLowerCase();
+
+                let target = truck.name + truck.description_short + truck.description_long;
+                let lowTarget = target.toLowerCase(target);
+
+                return lowTarget.contains(self.searchString());
+            });
+    });
 };
 
 /********************************************************************************************* */

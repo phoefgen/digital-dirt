@@ -17,7 +17,7 @@ html(lang='en')
       content
         .sidebar
           h2 Search
-          input(type='text', name='searchBox', placeholder='name')
+          input(data-bind="textInput: searchString", type='text', name='searchBox', placeholder='Search for a truck name, type, or other keywords')
           hr
           .searchList
             ul(data-bind="foreach: visibleTrucks")

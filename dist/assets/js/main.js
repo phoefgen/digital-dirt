@@ -92,7 +92,6 @@ function getTrucks() {
         var nameVendors = Object.keys(data.vendors);
         var numVendors = nameVendors.length;
         var cleanVendors = [];
-        console.log(data);
 
         for (var i = 0; i < numVendors; i++) {
             // Some trucks are incomplete (especially those that are registered but have never
@@ -118,15 +117,34 @@ var ViewModel = function ViewModel() {
     // map global array of passed in trucks to observableArray of truck objects.
     self.trucks = ko.observableArray(trucks);
 
-    // All trucks are set to default visible, include all trucks when the model is instantiated.
-    // This observable array will be manipulated to control the visibility of trucks.
-    self.visibleTrucks = self.trucks;
-
     // Fire the pre defined click event if a list item is selected.
     self.selectedTruck = function (truck) {
         console.log(truck);
         google.maps.event.trigger(truck.marker, 'click');
     };
+
+    // Manipulate the list and marker visibility with a text search
+    // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+
+    // init with null value to allow placeholder txt to be dispalyed.
+    self.searchString = ko.observable('');
+
+    // modify the members of visible trucks with search
+    self.visibleTrucks = ko.computed(function () {
+        // make no changes if there is nothing in the search box (init state)
+        if (self.searchString() === '') {
+            return self.trucks();
+        } else return ko.utils.arrayFilter(self.visibleTrucks(), function (truck) {
+            // Combine name and description search (food genre is likely mentioned in the description)
+            // sanitize text input
+            var filter = self.searchString().toLowerCase();
+
+            var target = truck.name + truck.description_short + truck.description_long;
+            var lowTarget = target.toLowerCase(target);
+
+            return lowTarget.includes(self.searchString());
+        });
+    });
 };
 
 /********************************************************************************************* */
