@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title> Hungry Truck</title>
+    <title> Wheres lunch?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -12,13 +13,15 @@
   <body>
     <site>
       <header>
-        <h1>Hungry Trucker</h1>
+        <h1>Where's Lunch?</h1>
       </header>
       <content>
         <div class="sidebar">
-          <h2>Search</h2>
-          <input data-bind="textInput: searchString" type="text" name="searchBox" placeholder="Search for a truck name, type, or other keywords">
-          <hr>
+          <div class="search">
+            <h2>Food Truck Search:</h2>
+            <input data-bind="textInput: searchString" type="text" name="searchBox" placeholder="Search by name or keyword">
+            <hr>
+          </div>
           <div class="searchList">
             <ul data-bind="foreach: visibleTrucks">
               <li><span data-bind="text: name, click: $parent.selectedTruck"></span></li>
@@ -29,8 +32,7 @@
       </content>
     </site>
     <footer>
-      <p>paul.hoefgen@gmail.com   --  <a href="https://github.com/phoefgen/digital-dirt">Source on Github</a></p>
-      <p>NOTE: Amazon does not publish the location of its DC's, markers are approximate</p>
+      <p>paul.hoefgen@gmail.com   --  <a href="https://github.com/phoefgen/digital-dirt">Source on Github</a> Data from  <a href="https://streetfoodapp.com">streetfoodapp.com</a></p>
     </footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7qdN9GmWXn3wLhxhkJ18cEL6DgWpoY4Y&amp;v=3&amp;callback=initMap"></script>
   </body>

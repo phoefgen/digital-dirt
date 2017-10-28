@@ -16,10 +16,15 @@ function getData(cb) {
     fetch("http://localhost:1337/data.streetfoodapp.com/1.1/schedule/vancouver/")
         .then(
         function (response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
             response.json().then(
                 function (data) {
                     cb(data);
                 });
+        }).catch(function (error) {
+            alert(`ohno! Unable to retrieve foodtruck API data: ${error} `);
         });
 }
 
@@ -48,21 +53,27 @@ class truck {
         this.visible = true;
     }
     createMarker(name, position, infowindow, id) {
-        const marker = new google.maps.Marker({
+        const marker = new google.maps.Marker({    // map is explicitly excluded here, and used to control the UX later.
             title: name,
             icon: '../img/truck.png',
             position: position,
-            map: truckMap,
             animation: google.maps.Animation.DROP,
         });
         window.google.maps.event.addListener(marker, 'click', function () {
-            // On click, close all open truck info windows and open the infowindow
+            // On click, close all open truck info windows, stop the animation and then open the infowindow
             // that was called.
             trucks.forEach(function (truck) {
+                truck.marker.setAnimation(null);
                 truck.infowindow.close(truckMap, truck.marker);
             });
+
+            // Re orient and open the info window for the marker:
             const truck = trucks[id];
+            truckMap.panTo(truck.marker.position);
             truck.infowindow.open(truckMap, truck.marker);
+
+            // Animate the selected marker:
+            marker.setAnimation(google.maps.Animation.BOUNCE);
         });
         return marker;
     }
@@ -75,6 +86,64 @@ class truck {
                     `;
     }
 }
+
+var ViewModel = function () {
+    var self = this;
+
+    // map global array of passed in trucks to observableArray of truck objects.
+    self.trucks = ko.observableArray(trucks);
+
+    // Fire the pre defined click event if a list item is selected.
+    self.selectedTruck = function (truck) {
+        google.maps.event.trigger(truck.marker, 'click');
+    };
+
+    // init with null value to allow placeholder txt to be dispalyed.
+    self.searchString = ko.observable('');
+
+    // Manipulate the list and marker visibility with a text search
+    // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+    // modify the members of visible trucks with search
+    self.visibleTrucks = ko.computed(function () {
+        // make no changes if there is nothing in the search box (init state)
+        if (self.searchString() === '') {
+            ko.utils.arrayForEach(self.trucks(), function (truck) {
+                truck.marker.setMap(truckMap);
+            });
+            return self.trucks();
+        } else
+            return ko.utils.arrayFilter(self.visibleTrucks(), function (truck) {
+                // Combine name and description search (food type is likely mentioned in the description)
+
+                // sanitize text input
+                let filter = self.searchString().toLowerCase();
+
+                // enable searching the description fields
+                let target = truck.name + truck.description_short + truck.description_long;
+
+                // Determine match status.
+                let match = target.toLowerCase(target).includes(filter);
+
+                // Support backspace.
+             /*   let match = function(){
+                    if (target.toLowerCase.indexOf(filter) >= 0) {
+                        return false;
+                    } else{
+                        return true;
+                    }
+                }; */
+
+                if (match) {
+                    truck.marker.setMap(truckMap);
+                } else {
+                    truck.marker.setMap(null);
+                }
+
+                // pop matches to the visibleTrucks observable array.
+                return match;
+            });
+    });
+};
 
 function getTrucks() {
     // get truck data
@@ -103,49 +172,12 @@ function getTrucks() {
     });
 }
 
-var ViewModel = function () {
-    var self = this;
-
-    // map global array of passed in trucks to observableArray of truck objects.
-    self.trucks = ko.observableArray(trucks);
-
-    // Fire the pre defined click event if a list item is selected.
-    self.selectedTruck = function (truck) {
-        console.log(truck);
-        google.maps.event.trigger(truck.marker, 'click');
-    };
-
-
-    // Manipulate the list and marker visibility with a text search
-    // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
-
-    // init with null value to allow placeholder txt to be dispalyed.
-    self.searchString = ko.observable('');
-
-    // modify the members of visible trucks with search
-    self.visibleTrucks = ko.computed(function () {
-        // make no changes if there is nothing in the search box (init state)
-        if (self.searchString() === '') {
-            return self.trucks();
-        } else
-            return ko.utils.arrayFilter(self.visibleTrucks(), function (truck) {
-                // Combine name and description search (food genre is likely mentioned in the description)
-                // sanitize text input
-                let filter = self.searchString().toLowerCase();
-
-                let target = truck.name + truck.description_short + truck.description_long;
-                let lowTarget = target.toLowerCase(target);
-
-                return lowTarget.contains(self.searchString());
-            });
-    });
-};
-
 /********************************************************************************************* */
 // Map functions.
 /********************************************************************************************* */
 
 function initMap() {
+
 
     // Generate a map of Vancouver BC
     truckMap = new google.maps.Map(document.getElementById('map'), {
@@ -154,4 +186,5 @@ function initMap() {
     });
     // Place food trucks on it.
     getTrucks();
+
 }

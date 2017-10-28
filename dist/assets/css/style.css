@@ -5,10 +5,14 @@ body {
 }
 
 h1 {
-  color: black;
+  color: white;
   text-align: center;
   padding-top: 0;
   margin-top: 0;
+}
+
+h2 {
+  text-align: center;
 }
 
 h3 {
@@ -37,7 +41,8 @@ footer a:visited {
 }
 
 .map {
-  height: 100vh;
+  height: 85vh;
+  width: 100%;
   border-radius: 5px;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -46,8 +51,68 @@ footer a:visited {
 
 .sidebar {
   position: absolute;
-  width: 30%;
-  height: 100vh;
+  width: auto;
+  min-width: 450px;
+  height: 85vh;
   background-color: white;
   z-index: 99;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.sidebar input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 18px;
+}
+
+.searchList ul {
+  height: 60vh;
+  overflow: auto;
+}
+
+.searchList li {
+  border-bottom: 1px solid black;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.searchList li:hover {
+  background-color: #333;
+  color: white;
+}
+
+#truckDetail h1 {
+  color: black;
+}
+
+@media only screen and (max-width: 600px) {
+  .searchList {
+    height: 10vh;
+  }
+
+  .searchList ul {
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .sidebar {
+    height: 10vh;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .search hr {
+    display: none;
+  }
+
+  body {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
 }

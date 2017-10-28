@@ -1,7 +1,8 @@
 doctype html
 html(lang='en')
   head
-    title  Hungry Truck
+    title  Wheres lunch?
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     script(type='text/javascript' src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js')
     script(type='text/javascript' src='js/main.js')
@@ -13,12 +14,13 @@ html(lang='en')
   body
     site
       header
-        h1 Hungry Trucker
+        h1 Where's Lunch?
       content
         .sidebar
-          h2 Search
-          input(data-bind="textInput: searchString", type='text', name='searchBox', placeholder='Search for a truck name, type, or other keywords')
-          hr
+          .search
+            h2 Food Truck Search:
+            input(data-bind="textInput: searchString", type='text', name='searchBox', placeholder='Search by name or keyword')
+            hr
           .searchList
             ul(data-bind="foreach: visibleTrucks")
               li
@@ -28,7 +30,7 @@ html(lang='en')
 
 
     footer
-      p paul.hoefgen@gmail.com   --  #[a(href='https://github.com/phoefgen/digital-dirt') Source on Github]
-      p NOTE: Amazon does not publish the location of its DC's, markers are approximate
+      p paul.hoefgen@gmail.com   --  #[a(href='https://github.com/phoefgen/digital-dirt') Source on Github] Data from  #[a(href='https://streetfoodapp.com') streetfoodapp.com]
+
     script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB7qdN9GmWXn3wLhxhkJ18cEL6DgWpoY4Y&v=3&callback=initMap')
 
