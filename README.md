@@ -12,9 +12,11 @@ Pulls a google map, and polls the streetfood.com api for food truck locations.
 4. install linting support (used by the build) `npm install -g jshint`
 5. enable SASS support with `gem install sass`
 
+6. In a terminal session, start the cors proxy with `corsproxy`. Leave the process running. 
 6. In a second terminal session, start a dev server with `gulp`. This will open the site in your default browser from a
    local development server.
 
+Food truck location and description data is sourced from streetfoodapp.com
 
 
 
