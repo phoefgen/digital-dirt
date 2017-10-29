@@ -12,7 +12,9 @@ let infowindow;
 function getData(cb) {
     // Data source does not support CORS, requires local cors proxy in dev, and local api proxy
     // in production.
-
+    // In production, this would need to be a seperate dedicated server side process. This should
+    // also rate limit the load on the upstream API, allowing future requests from lunch-truck users
+    // to be cached.
     fetch("http://localhost:1337/data.streetfoodapp.com/1.1/schedule/vancouver/")
         .then(
         function (response) {
@@ -27,6 +29,12 @@ function getData(cb) {
             alert(`Unable to retrieve foodtruck API data. Corsproxy running?: ${error} `);
         });
 }
+
+
+/********************************************************************************************* */
+// "truck" is a class that defines truck objects, there position on a map, and the attributes of
+// the map markers.
+/********************************************************************************************* */
 
 class truck {
     constructor(truck, index) {
@@ -90,6 +98,10 @@ class truck {
     }
 }
 
+/********************************************************************************************* */
+// The view model uses knockout observables to map the interaction with the search bar, to the
+// list of displayed markers on the map.
+/********************************************************************************************* */
 var ViewModel = function () {
     var self = this;
 
@@ -141,6 +153,10 @@ var ViewModel = function () {
     });
 };
 
+/********************************************************************************************* */
+// A helper function that polls the upstream API, santizes the response and calls the truck class
+// constructor, storing the output in an ko.observables array.
+/********************************************************************************************* */
 function getTrucks() {
     // get truck data
     getData(function (data) {
@@ -169,7 +185,7 @@ function getTrucks() {
 }
 
 /********************************************************************************************* */
-// Map functions.
+// After a google map loads, gather truck data and enable the UI controls (hide sidebar)
 /********************************************************************************************* */
 
 function initMap() {
@@ -198,5 +214,9 @@ function initMap() {
     }
     );
 
+}
+
+function mapError(){
+    alert('Error Loading Google Maps API');
 }
 
