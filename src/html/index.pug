@@ -6,15 +6,17 @@ html(lang='en')
     script(type='text/javascript' src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js')
     script(type='text/javascript' src='js/main.js')
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
     link(href='https://fonts.googleapis.com/css?family=ubuntu+mono" rel="stylesheet"')
     link(href='https://fonts.googleapis.com/css?family=poiret+one" rel="stylesheet"')
 
     link(href='/css/style.min.css', rel='stylesheet')
-
   body
     site
       header
-        h1 Where's Lunch?
+          h1#toggleButton
+            i.fa.fa-search
+            h1 Lunch Hunter #[i.fa.fa-truck]
       content
         .sidebar
           .search
@@ -26,9 +28,6 @@ html(lang='en')
               li
                 span(data-bind='text: name, click: $parent.selectedTruck')
         .map#map
-
-
-
     footer
       p paul.hoefgen@gmail.com   --  #[a(href='https://github.com/phoefgen/digital-dirt') Source on Github] Data from  #[a(href='https://streetfoodapp.com') streetfoodapp.com]
 

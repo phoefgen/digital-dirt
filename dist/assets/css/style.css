@@ -1,7 +1,7 @@
 body {
-  background-color: midnightblue;
+  background-color: #1717bc;
   font-family: "Ubuntu Mono", monospace;
-  color: blac #k;
+  color: black;
 }
 
 h1 {
@@ -9,6 +9,7 @@ h1 {
   text-align: center;
   padding-top: 0;
   margin-top: 0;
+  display: inline;
 }
 
 h2 {
@@ -20,9 +21,13 @@ h3 {
   text-align: center;
 }
 
+header li {
+  display: inline;
+}
+
 header {
   height: 20%;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 footer {
@@ -30,7 +35,8 @@ footer {
   font-size: 8;
   color: white;
 }
-footer a:visited {
+
+a:visited {
   color: white;
 }
 
@@ -90,18 +96,13 @@ footer a:visited {
   color: black;
 }
 
+#toggleButton {
+  text-align: left;
+  color: grey;
+}
+
 @media only screen and (max-width: 600px) {
-  .searchList {
-    height: 10vh;
-  }
-
-  .searchList ul {
-    overflow: hidden;
-    background-color: white;
-  }
-
   .sidebar {
-    height: 10vh;
     width: 100%;
     min-width: 100%;
   }

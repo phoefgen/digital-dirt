@@ -82,6 +82,9 @@ var truck = function () {
 
                 // Animate the selected marker:
                 marker.setAnimation(google.maps.Animation.BOUNCE);
+
+                // Hide the search bar:
+                $('.sidebar').css('display', 'none');
             });
             return marker;
         }
@@ -181,8 +184,22 @@ function initMap() {
     // Generate a map of Vancouver BC
     truckMap = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        center: { lat: 49.246292, lng: -123.116226 }
+        center: { lat: 49.246292, lng: -123.116226 },
+        mapTypeControl: false,
+        streetViewControl: false
     });
     // Place food trucks on it.
     getTrucks();
+
+    // Add ability to hide menu
+    $('#toggleButton').click(function () {
+        console.log($('#toggleButton').css('display'));
+        if ($('.sidebar').css('display') == 'none') {
+            console.log('display  == none');
+            $('.sidebar').css('display', 'block');
+        } else {
+            console.log('display == block');
+            $('.sidebar').css('display', 'none');
+        }
+    });
 }
