@@ -27,7 +27,7 @@ function getData(cb) {
             cb(data);
         });
     }).catch(function (error) {
-        alert('ohno! Unable to retrieve foodtruck API data: ' + error + ' ');
+        alert('Unable to retrieve foodtruck API data. Corsproxy running?: ' + error + ' ');
     });
 }
 

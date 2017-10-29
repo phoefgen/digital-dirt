@@ -24,7 +24,7 @@ function getData(cb) {
                     cb(data);
                 });
         }).catch(function (error) {
-            alert(`ohno! Unable to retrieve foodtruck API data: ${error} `);
+            alert(`Unable to retrieve foodtruck API data. Corsproxy running?: ${error} `);
         });
 }
 
@@ -189,7 +189,7 @@ function initMap() {
     $('#toggleButton').click(function () {
         console.log($('#toggleButton').css('display'));
         if ($('.sidebar').css('display') == 'none') {
-            console.log('display  == none')
+            console.log('display  == none');
             $('.sidebar').css('display', 'block');
         } else {
             console.log('display == block');
