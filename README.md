@@ -1,4 +1,4 @@
-# digital-dirt
+# lunch-hunter
 An offroad trail planner prototype
 
 

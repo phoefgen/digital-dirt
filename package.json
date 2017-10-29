@@ -1,7 +1,7 @@
 {
-  "name": "digital-dirt",
+  "name": "lunch-hunter",
   "version": "1.0.0",
-  "description": "Plan offroad excursions in British Columbia",
+  "description": "Find lunch from a foodtruck in Vancouver"
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phoefgen/digital-dirt.git"
+    "url": "git+https://github.com/phoefgen/lunch-hunter.git"
   },
   "author": "Paul Hoefgen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/phoefgen/digital-dirt/issues"
+    "url": "https://github.com/phoefgen/lunch-hunter/issues"
   },
-  "homepage": "https://github.com/phoefgen/digital-dirt#readme",
+  "homepage": "https://github.com/phoefgen/lunch-hunter#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -27,7 +27,7 @@
     "gulp-babel": "^7.0.0",
     "gulp-cache": "^0.5.0",
     "gulp-concat": "^2.6.1",
-    "gulp-cssnano": "^2.1.2",
+    "gulp-cssnano": "^2.1.2",''
     "gulp-imagemin": "^3.4.0",
     "gulp-jasmine-browser": "^1.9.1",
     "gulp-jshint": "^2.0.4",
@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "jquery": "^3.2.1",
-    "knockout": "^3.4.2",
-    "rss-to-json": "^1.0.2"
+    "knockout": "^3.4.2"
   }
 }
