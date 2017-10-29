@@ -120,19 +120,12 @@ var ViewModel = function () {
 
                 // enable searching the description fields
                 let target = truck.name + truck.description_short + truck.description_long;
+                target = target.toLowerCase();
 
                 // Determine match status.
-                let match = target.toLowerCase(target).includes(filter);
+                let match = (target.indexOf(filter) >= 0);
 
-                // Support backspace.
-             /*   let match = function(){
-                    if (target.toLowerCase.indexOf(filter) >= 0) {
-                        return false;
-                    } else{
-                        return true;
-                    }
-                }; */
-
+                //update map view model
                 if (match) {
                     truck.marker.setMap(truckMap);
                 } else {
