@@ -36,7 +36,7 @@ function getData(cb) {
 // the map markers.
 /********************************************************************************************* */
 
-class truck {
+class Truck {
     constructor(truck, index) {
         // translate API data
         this.name = truck.name;
@@ -175,7 +175,7 @@ function getTrucks() {
         }
         // fill the JS array
         for (let i = 0; i < cleanVendors.length; i++) {
-            trucks.push(new truck(cleanVendors[i], i));
+            trucks.push(new Truck(cleanVendors[i], i));
         }
 
         // Create a view model, and bind the view to it.
@@ -215,8 +215,3 @@ function initMap() {
     );
 
 }
-
-function mapError(){
-    alert('Error Loading Google Maps API');
-}
-

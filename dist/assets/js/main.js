@@ -38,21 +38,21 @@ function getData(cb) {
 // the map markers.
 /********************************************************************************************* */
 
-var truck = function () {
-    function truck(_truck, index) {
-        _classCallCheck(this, truck);
+var Truck = function () {
+    function Truck(truck, index) {
+        _classCallCheck(this, Truck);
 
         // translate API data
-        this.name = _truck.name;
-        this.email = _truck.email;
-        this.rating = _truck.rating;
-        this.description_long = _truck.description;
+        this.name = truck.name;
+        this.email = truck.email;
+        this.rating = truck.rating;
+        this.description_long = truck.description;
         this.id = index;
-        this.position = { lat: _truck.last.latitude, lng: _truck.last.longitude };
+        this.position = { lat: truck.last.latitude, lng: truck.last.longitude };
 
         // Not all valid trucks have short descriptions.
-        if (_truck.description_short !== null) {
-            this.description_short = _truck.description_short;
+        if (truck.description_short !== null) {
+            this.description_short = truck.description_short;
         } else {
             this.description_short = ' ';
         }
@@ -65,7 +65,7 @@ var truck = function () {
         this.visible = true;
     }
 
-    _createClass(truck, [{
+    _createClass(Truck, [{
         key: 'createMarker',
         value: function createMarker(name, position, infowindow, id) {
             var marker = new google.maps.Marker({ // map is explicitly excluded here, and used to control the UX later.
@@ -103,7 +103,7 @@ var truck = function () {
         }
     }]);
 
-    return truck;
+    return Truck;
 }();
 
 /********************************************************************************************* */
@@ -184,7 +184,7 @@ function getTrucks() {
         }
         // fill the JS array
         for (var _i = 0; _i < cleanVendors.length; _i++) {
-            trucks.push(new truck(cleanVendors[_i], _i));
+            trucks.push(new Truck(cleanVendors[_i], _i));
         }
 
         // Create a view model, and bind the view to it.
@@ -219,8 +219,4 @@ function initMap() {
             $('.sidebar').css('display', 'none');
         }
     });
-}
-
-function mapError() {
-    alert('Error Loading Google Maps API');
 }
