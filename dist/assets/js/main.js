@@ -72,6 +72,8 @@ var Truck = function () {
                 title: name,
                 icon: '../img/truck.png',
                 position: position,
+                map: truckMap,
+                visible: false,
                 animation: google.maps.Animation.DROP
             });
             window.google.maps.event.addListener(marker, 'click', function () {
@@ -133,7 +135,7 @@ var ViewModel = function ViewModel() {
         // make no changes if there is nothing in the search box (init state)
         if (self.searchString() === '') {
             ko.utils.arrayForEach(self.trucks(), function (truck) {
-                truck.marker.setMap(truckMap);
+                truck.marker.setVisible(true);
             });
             return self.trucks();
         } else return ko.utils.arrayFilter(self.visibleTrucks(), function (truck) {
@@ -151,9 +153,9 @@ var ViewModel = function ViewModel() {
 
             //update map view model
             if (match) {
-                truck.marker.setMap(truckMap);
+                truck.marker.setVisible(true);
             } else {
-                truck.marker.setMap(null);
+                truck.marker.setVisible(false);
             }
 
             // pop matches to the visibleTrucks observable array.
