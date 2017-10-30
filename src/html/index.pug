@@ -29,7 +29,7 @@ html(lang='en')
     footer
       p paul.hoefgen@gmail.com   --  #[a(href='https://github.com/phoefgen/lunch-hunter') Source on Github] Data from  #[a(href='https://streetfoodapp.com') streetfoodapp.com]
 
-script(type='text/javascript' src='https://code.jquery.com/jquery-3.2.1.min.js')
-script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js')
-script(type='text/javascript' src='js/main.js')
-script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB7qdN9GmWXn3wLhxhkJ18cEL6DgWpoY4Y&v=3&callback=initMap')
+script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js')
+script(src='js/main.js')
+script(async, defer, onerror="handleMapError()" src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB7qdN9GmWXn3wLhxhkJ18cEL6DgWpoY4Y&v=3&callback=initMap')

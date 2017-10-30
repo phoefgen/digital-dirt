@@ -222,3 +222,7 @@ function initMap() {
         }
     });
 }
+
+var handleMapError = function handleMapError() {
+    alert('Error Loading Google Map API');
+};

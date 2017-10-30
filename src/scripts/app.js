@@ -218,3 +218,7 @@ function initMap() {
     );
 
 }
+
+var handleMapError = function (){
+    alert('Error Loading Google Map API');
+}
